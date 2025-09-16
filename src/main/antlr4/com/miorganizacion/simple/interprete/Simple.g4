@@ -1,9 +1,14 @@
 grammar Simple;
 
-start
-:
-	'hello' 'world'
-;
+program: PROGRAM ID BRACKET_OPEN
+	sentence*
+	BRACKET_CLOSE;
+	
+sentence: var_decl | var_assign | println;
+
+var_decl: VAR ID;
+var_assign: ID ASSIGN NUMBER SEMICOLON;
+println: PRITNLN NUMBER SEMICOLON;
 
 PROGRAM: 'program';
 VAR: 'var';

@@ -11,9 +11,33 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface SimpleVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link SimpleParser#start}.
+	 * Visit a parse tree produced by {@link SimpleParser#program}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStart(SimpleParser.StartContext ctx);
+	T visitProgram(SimpleParser.ProgramContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleParser#sentence}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSentence(SimpleParser.SentenceContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleParser#var_decl}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVar_decl(SimpleParser.Var_declContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleParser#var_assign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVar_assign(SimpleParser.Var_assignContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleParser#println}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintln(SimpleParser.PrintlnContext ctx);
 }

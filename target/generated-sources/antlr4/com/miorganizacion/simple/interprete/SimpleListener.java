@@ -8,13 +8,53 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface SimpleListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link SimpleParser#start}.
+	 * Enter a parse tree produced by {@link SimpleParser#program}.
 	 * @param ctx the parse tree
 	 */
-	void enterStart(SimpleParser.StartContext ctx);
+	void enterProgram(SimpleParser.ProgramContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SimpleParser#start}.
+	 * Exit a parse tree produced by {@link SimpleParser#program}.
 	 * @param ctx the parse tree
 	 */
-	void exitStart(SimpleParser.StartContext ctx);
+	void exitProgram(SimpleParser.ProgramContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleParser#sentence}.
+	 * @param ctx the parse tree
+	 */
+	void enterSentence(SimpleParser.SentenceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleParser#sentence}.
+	 * @param ctx the parse tree
+	 */
+	void exitSentence(SimpleParser.SentenceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleParser#var_decl}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar_decl(SimpleParser.Var_declContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleParser#var_decl}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar_decl(SimpleParser.Var_declContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleParser#var_assign}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar_assign(SimpleParser.Var_assignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleParser#var_assign}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar_assign(SimpleParser.Var_assignContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleParser#println}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintln(SimpleParser.PrintlnContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleParser#println}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintln(SimpleParser.PrintlnContext ctx);
 }
