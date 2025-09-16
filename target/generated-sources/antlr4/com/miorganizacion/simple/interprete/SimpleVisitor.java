@@ -50,4 +50,16 @@ public interface SimpleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpression(SimpleParser.ExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleParser#factor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFactor(SimpleParser.FactorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleParser#term}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTerm(SimpleParser.TermContext ctx);
 }

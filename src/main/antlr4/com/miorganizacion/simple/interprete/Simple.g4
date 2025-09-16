@@ -8,8 +8,10 @@ grammar Simple;
 @parser::members {
 	Map<String, Object> symbolTable = new HashMap<String, Object>();
 }
-program: PROGRAM ID BRACKET_OPEN
-	sentence*
+
+program
+	: PROGRAM ID BRACKET_OPEN
+	 sentence*
 	BRACKET_CLOSE;
 	
 sentence: var_decl | var_assign | println;
@@ -17,11 +19,11 @@ sentence: var_decl | var_assign | println;
 var_decl: VAR ID SEMICOLON
 		{symbolTable.put($ID.text, 0);};
 		
-var_assign: ID ASSIGN NUMBER SEMICOLON
+var_assign: ID ASSIGN expression SEMICOLON
 		{symbolTable.put($ID.text, $expression.value);};
 		
-println: PRITNLN NUMBER SEMICOLON
-		{System.out.println($expression.value;};
+println: PRINTLN expression SEMICOLON
+		{System.out.println($expression.value);};
 		
 expression returns [Object value]:
 		t1=factor {$value = (int)$t1.value;}
@@ -66,11 +68,8 @@ PAR_CLOSE: ')';
 
 SEMICOLON: ';';
 
-ID: [a-za-Z_][a-za-Z0-9_]*;
+ID: [a-zA-Z_][a-zA-Z0-9_]*;
 
 NUMBER: [0-9]+;
 
-WS
-:
-	[ \t\r\n]+ -> skip
-;
+WS: [ \t\r\n]+ -> skip;
