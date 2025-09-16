@@ -1,14 +1,29 @@
 grammar Simple;
 
+@parser::header {
+	import java.util.Map;
+	import java.util.HashMap;
+}
+
+@parser::members {
+	Map<String, Object> symbolTable = new HashMap<String, Object>();
+}
 program: PROGRAM ID BRACKET_OPEN
 	sentence*
 	BRACKET_CLOSE;
 	
 sentence: var_decl | var_assign | println;
 
-var_decl: VAR ID;
-var_assign: ID ASSIGN NUMBER SEMICOLON;
-println: PRITNLN NUMBER SEMICOLON;
+var_decl: VAR ID SEMICOLON
+		{symbolTable.put($ID.text, 0);};
+var_assign: ID ASSIGN NUMBER SEMICOLON
+		{symbolTable.put($ID.text, $expression.value);};
+println: PRITNLN NUMBER SEMICOLON
+		{System.out.println($expression.value;};
+expression returns [Object value]:
+        NUMBER {$value = Integer.parseInt($NUMBER.text); }
+        |
+        ID { $value = symbolTable.get($ID.text);};
 
 PROGRAM: 'program';
 VAR: 'var';

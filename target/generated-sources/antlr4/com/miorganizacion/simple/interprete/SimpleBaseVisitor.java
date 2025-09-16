@@ -1,5 +1,9 @@
 // Generated from com\miorganizacion\simple\interprete\Simple.g4 by ANTLR 4.9.2
 package com.miorganizacion.simple.interprete;
+
+	import java.util.Map;
+	import java.util.HashMap;
+
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -46,4 +50,11 @@ public class SimpleBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitPrintln(SimpleParser.PrintlnContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitExpression(SimpleParser.ExpressionContext ctx) { return visitChildren(ctx); }
 }

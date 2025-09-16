@@ -1,6 +1,10 @@
 // Generated from com\miorganizacion\simple\interprete\Simple.g4 by ANTLR 4.9.2
 package com.miorganizacion.simple.interprete;
 
+	import java.util.Map;
+	import java.util.HashMap;
+
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -71,6 +75,18 @@ public class SimpleBaseListener implements SimpleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPrintln(SimpleParser.PrintlnContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpression(SimpleParser.ExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpression(SimpleParser.ExpressionContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

@@ -1,5 +1,9 @@
 // Generated from com\miorganizacion\simple\interprete\Simple.g4 by ANTLR 4.9.2
 package com.miorganizacion.simple.interprete;
+
+	import java.util.Map;
+	import java.util.HashMap;
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -57,4 +61,14 @@ public interface SimpleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPrintln(SimpleParser.PrintlnContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpression(SimpleParser.ExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpression(SimpleParser.ExpressionContext ctx);
 }
