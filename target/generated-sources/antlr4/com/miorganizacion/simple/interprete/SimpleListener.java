@@ -3,6 +3,9 @@ package com.miorganizacion.simple.interprete;
 
 	import java.util.Map;
 	import java.util.HashMap;
+	import java.util.List;
+	import java.util.ArrayList;
+	import com.miorganizacion.simple.interprete.ast.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -32,6 +35,26 @@ public interface SimpleListener extends ParseTreeListener {
 	 */
 	void exitSentence(SimpleParser.SentenceContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SimpleParser#println}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintln(SimpleParser.PrintlnContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleParser#println}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintln(SimpleParser.PrintlnContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditional(SimpleParser.ConditionalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditional(SimpleParser.ConditionalContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SimpleParser#var_decl}.
 	 * @param ctx the parse tree
 	 */
@@ -51,16 +74,6 @@ public interface SimpleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVar_assign(SimpleParser.Var_assignContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SimpleParser#println}.
-	 * @param ctx the parse tree
-	 */
-	void enterPrintln(SimpleParser.PrintlnContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SimpleParser#println}.
-	 * @param ctx the parse tree
-	 */
-	void exitPrintln(SimpleParser.PrintlnContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SimpleParser#expression}.
 	 * @param ctx the parse tree

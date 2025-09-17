@@ -3,6 +3,9 @@ package com.miorganizacion.simple.interprete;
 
 	import java.util.Map;
 	import java.util.HashMap;
+	import java.util.List;
+	import java.util.ArrayList;
+	import com.miorganizacion.simple.interprete.ast.*;
 
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -35,6 +38,20 @@ public class SimpleBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitPrintln(SimpleParser.PrintlnContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitConditional(SimpleParser.ConditionalContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitVar_decl(SimpleParser.Var_declContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -43,13 +60,6 @@ public class SimpleBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitVar_assign(SimpleParser.Var_assignContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitPrintln(SimpleParser.PrintlnContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

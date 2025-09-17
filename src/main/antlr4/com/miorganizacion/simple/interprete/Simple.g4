@@ -3,6 +3,9 @@ grammar Simple;
 @parser::header {
 	import java.util.Map;
 	import java.util.HashMap;
+	import java.util.List;
+	import java.util.ArrayList;
+	import com.miorganizacion.simple.interprete.ast.*;
 }
 
 @parser::members {
@@ -11,36 +14,68 @@ grammar Simple;
 
 program
 	: PROGRAM ID BRACKET_OPEN
-	 sentence*
-	BRACKET_CLOSE;
+	{
+		List<ASTNode> body = new ArrayList<ASTNode>();
+		Map<String, Object> symbolTable = new HashMap<String, Object>();
+	}
+	 (sentence { body.add($sentence.node); })*
+	BRACKET_CLOSE
+	{
+		for(ASTNode n : body) {
+			n.execute(symbolTable);
+		}
+	};
 	
-sentence: var_decl | var_assign | println;
+sentence returns [ASTNode node]: println { $node = $println.node; } 
+				| conditional { $node = $conditional.node; }
+				| var_decl { $node = $var_decl.node; }
+				| var_assign { $node = $var_assign.node; }
+				;
+		
+println returns [ASTNode node]: PRINTLN expression SEMICOLON
+		{$node = new Println($expression.node);};
+		
+conditional returns [ASTNode node]: IF PAR_OPEN expression PAR_CLOSE
+			 {
+			 	List<ASTNode> body = new ArrayList<ASTNode>();
+			 }
+			 BRACKET_OPEN (s1=sentence { body.add($s1.node); })* BRACKET_CLOSE
+			 ELSE
+ 			 {
+			 	List<ASTNode> elseBody = new ArrayList<ASTNode>();
+			 }
+			 BRACKET_OPEN (s2=sentence { elseBody.add($s2.node); })* BRACKET_CLOSE
+			 {
+			 	$node = new If($expression.node, body, elseBody);
+			 };
+	
+var_decl returns [ASTNode node]:
+	VAR ID SEMICOLON { $node = new VarDecl($ID.text); }
+;
 
-var_decl: VAR ID SEMICOLON
-		{symbolTable.put($ID.text, 0);};
-		
-var_assign: ID ASSIGN expression SEMICOLON
-		{symbolTable.put($ID.text, $expression.value);};
-		
-println: PRINTLN expression SEMICOLON
-		{System.out.println($expression.value);};
-		
-expression returns [Object value]:
-		t1=factor {$value = (int)$t1.value;}
-			(PLUS t2=factor {$value = (int)$value + (int)$t2.value;})*;
+var_assign returns [ASTNode node]:
+	ID ASSIGN expression SEMICOLON { $node = new VarAssign($ID.text, $expression.node); }
+;
+	
+expression returns [ASTNode node]:
+		t1=factor { $node = $t1.node; }
+			(PLUS t2=factor { $node = new Addition($node, $t2.node); })*;
 			
-factor returns [Object value]: t1=term {$value = (int)$t1.value;}
-		(MULT t2=term {$value = (int)$value * (int)$t2.value;})*;
+factor returns [ASTNode node]: t1=term { $node = $t1.node; }
+		(MULT t2=term { $node = new Multiplication($node, $t2.node); })*;
         
         
-term returns [Object value]: 
-		NUMBER {$value = Integer.parseInt($NUMBER.text); }
-		| ID {$value = symbolTable.get($ID.text);}
-		| PAR_OPEN expression {$value = $expression.value;} PAR_CLOSE;
+term returns [ASTNode node]: 
+		NUMBER { $node = new Constant(Integer.parseInt($NUMBER.text)); }
+		| BOOLEAN { $node = new Constant(Boolean.parseBoolean($BOOLEAN.text)); }
+		| ID { $node = new VarRef($ID.text); }
+		| PAR_OPEN expression { $node = $expression.node; } PAR_CLOSE;
 
 PROGRAM: 'program';
 VAR: 'var';
 PRINTLN: 'println';
+IF: 'if';
+ELSE: 'else';
 
 PLUS: '+';
 MINUS: '-';
@@ -67,6 +102,8 @@ PAR_OPEN: '(';
 PAR_CLOSE: ')';
 
 SEMICOLON: ';';
+
+BOOLEAN: 'true' | 'false';
 
 ID: [a-zA-Z_][a-zA-Z0-9_]*;
 
