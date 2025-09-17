@@ -3,6 +3,9 @@ package com.miorganizacion.simple.interprete;
 
 	import java.util.Map;
 	import java.util.HashMap;
+	import java.util.List;
+	import java.util.ArrayList;
+	import com.miorganizacion.simple.interprete.ast.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -27,6 +30,18 @@ public interface SimpleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSentence(SimpleParser.SentenceContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SimpleParser#println}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintln(SimpleParser.PrintlnContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleParser#conditional}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConditional(SimpleParser.ConditionalContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SimpleParser#var_decl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -39,15 +54,21 @@ public interface SimpleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVar_assign(SimpleParser.Var_assignContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SimpleParser#println}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrintln(SimpleParser.PrintlnContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link SimpleParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitExpression(SimpleParser.ExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleParser#factor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFactor(SimpleParser.FactorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleParser#term}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTerm(SimpleParser.TermContext ctx);
 }
