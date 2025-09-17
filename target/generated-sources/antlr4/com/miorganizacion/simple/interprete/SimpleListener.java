@@ -45,6 +45,16 @@ public interface SimpleListener extends ParseTreeListener {
 	 */
 	void exitPrintln(SimpleParser.PrintlnContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SimpleParser#printable_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintable_expr(SimpleParser.Printable_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleParser#printable_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintable_expr(SimpleParser.Printable_exprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SimpleParser#conditional}.
 	 * @param ctx the parse tree
 	 */
@@ -74,6 +84,16 @@ public interface SimpleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVar_assign(SimpleParser.Var_assignContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleParser#logic_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogic_expr(SimpleParser.Logic_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleParser#logic_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogic_expr(SimpleParser.Logic_exprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SimpleParser#expression}.
 	 * @param ctx the parse tree

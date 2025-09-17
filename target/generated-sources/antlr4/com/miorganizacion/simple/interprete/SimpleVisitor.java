@@ -36,6 +36,12 @@ public interface SimpleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrintln(SimpleParser.PrintlnContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SimpleParser#printable_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintable_expr(SimpleParser.Printable_exprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SimpleParser#conditional}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -53,6 +59,12 @@ public interface SimpleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitVar_assign(SimpleParser.Var_assignContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleParser#logic_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogic_expr(SimpleParser.Logic_exprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SimpleParser#expression}.
 	 * @param ctx the parse tree

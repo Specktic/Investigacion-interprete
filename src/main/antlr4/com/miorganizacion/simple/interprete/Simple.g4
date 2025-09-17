@@ -32,8 +32,15 @@ sentence returns [ASTNode node]: println { $node = $println.node; }
 				| var_assign { $node = $var_assign.node; }
 				;
 		
-println returns [ASTNode node]: PRINTLN expression SEMICOLON
-		{$node = new Println($expression.node);};
+println returns [ASTNode node]
+    : PRINTLN printable_expr SEMICOLON
+      { $node = new Println($printable_expr.node); }
+    ;		
+		
+printable_expr returns [ASTNode node]
+    : expression { $node = $expression.node; }    // aritmética
+    | logic_expr { $node = $logic_expr.node; }    // lógica
+    ;
 		
 conditional returns [ASTNode node]: IF PAR_OPEN expression PAR_CLOSE
 			 {
@@ -57,6 +64,11 @@ var_assign returns [ASTNode node]:
 	ID ASSIGN expression SEMICOLON { $node = new VarAssign($ID.text, $expression.node); }
 ;
 	
+logic_expr returns [ASTNode node]:
+    left=expression { $node = $left.node; }
+    ( AND right=expression { $node = new And($node, $right.node); } )*;
+
+
 expression returns [ASTNode node]:
 		t1=factor { $node = $t1.node; }
 			(
