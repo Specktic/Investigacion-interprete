@@ -1,10 +1,15 @@
 program miprograma {
-    var a;
+	var a;
     var b;
     var c;
     a = 2 + 3;
     b = true;
     c = false;
-    println a + 5;
     println b && c;
+    println a + 5;
+	println -b-(0.5);
+    println -b-(0.5);
+    println -b-(0.5);
+    println -b-(0.5);
+    println 7 <--> 10;
 }

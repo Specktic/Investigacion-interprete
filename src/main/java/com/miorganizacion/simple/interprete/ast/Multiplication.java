@@ -18,7 +18,7 @@ public class Multiplication implements ASTNode {
 
 	@Override
 	public Object execute(Map<String, Object> symbolTable) {
-		return (int)operand1.execute(symbolTable) * (int)operand2.execute(symbolTable);
+		return (double)operand1.execute(symbolTable) * (double)operand2.execute(symbolTable);
 	}
 
 }
