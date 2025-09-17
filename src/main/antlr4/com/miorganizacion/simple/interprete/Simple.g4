@@ -59,7 +59,10 @@ var_assign returns [ASTNode node]:
 	
 expression returns [ASTNode node]:
 		t1=factor { $node = $t1.node; }
-			(PLUS t2=factor { $node = new Addition($node, $t2.node); })*;
+			(
+				PLUS t2=factor { $node = new Addition($node, $t2.node); } |
+				DIST t3=factor { $node = new Distance($node, $t3.node); }
+			)*;
 			
 factor returns [ASTNode node]: t1=term { $node = $t1.node; }
 		(MULT t2=term { $node = new Multiplication($node, $t2.node); })*;
@@ -92,6 +95,8 @@ GEQ: '>=';
 LEQ: '<=';
 EQ: '==';
 NEQ: '!=';
+
+DIST: '<-->';
 
 ASSIGN: '=';
 
