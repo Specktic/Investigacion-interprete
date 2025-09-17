@@ -1,19 +1,15 @@
 program miprograma {
-<<<<<<< HEAD
-	var x;
-    x = -b-(0.5);
-    println x;
-    println -b-(0.5);
-    println -b-(0.5);
-    println -b-(0.5);
-=======
-    var a;
+	var a;
     var b;
     var c;
     a = 2 + 3;
     b = true;
     c = false;
-    println a + 5;
     println b && c;
->>>>>>> main
+    println a + 5;
+	println -b-(0.5);
+    println -b-(0.5);
+    println -b-(0.5);
+    println -b-(0.5);
+    println 7 <--> 10;
 }
