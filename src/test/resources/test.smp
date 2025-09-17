@@ -1,7 +1,10 @@
 program miprograma {
-	var a;
-	a = 10;
-	println 10 <--> 7;
-	println (2 + 10) <--> (3 * 4);
-	println a <--> 3;
+    var a;
+    var b;
+    var c;
+    a = 2 + 3;
+    b = true;
+    c = false;
+    println a + 5;
+    println b && c;
 }
