@@ -57,6 +57,11 @@ var_assign returns [ASTNode node]:
 	ID ASSIGN expression SEMICOLON { $node = new VarAssign($ID.text, $expression.node); }
 ;
 	
+logic_expr returns [ASTNode node]:
+    left=expression { $node = $left.node; }
+    ( AND right=expression { $node = new And($node, $right.node); } )*;
+
+
 expression returns [ASTNode node]:
 		t1=factor { $node = $t1.node; }
 			(
