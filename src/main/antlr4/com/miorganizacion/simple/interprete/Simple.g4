@@ -69,11 +69,12 @@ factor returns [ASTNode node]: t1=term { $node = $t1.node; }
         
         
 term returns [ASTNode node]: 
-		NUMBER { $node = new Constant(Integer.parseInt($NUMBER.text)); }
-		| BOOLEAN { $node = new Constant(Boolean.parseBoolean($BOOLEAN.text)); }
-		| ID { $node = new VarRef($ID.text); }
-		| PAR_OPEN expression { $node = $expression.node; } PAR_CLOSE;
-
+      NUMBER { $node = new Constant(Double.parseDouble($NUMBER.text)); }
+    | BOOLEAN { $node = new Constant(Boolean.parseBoolean($BOOLEAN.text)); }
+    | ID { $node = new VarRef($ID.text); }
+    | PAR_OPEN expression { $node = $expression.node; } PAR_CLOSE
+    | BERN PAR_OPEN expression PAR_CLOSE { $node = new Bernoulli($expression.node); }
+    ;
 PROGRAM: 'program';
 VAR: 'var';
 PRINTLN: 'println';
@@ -97,6 +98,7 @@ EQ: '==';
 NEQ: '!=';
 
 DIST: '<-->';
+BERN: '-b-';
 
 ASSIGN: '=';
 
@@ -112,6 +114,6 @@ BOOLEAN: 'true' | 'false';
 
 ID: [a-zA-Z_][a-zA-Z0-9_]*;
 
-NUMBER: [0-9]+;
+NUMBER: [0-9]+ ('.' [0-9]+)?;
 
 WS: [ \t\r\n]+ -> skip;
